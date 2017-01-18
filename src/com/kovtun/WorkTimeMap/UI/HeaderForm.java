@@ -13,6 +13,7 @@ import com.kovtun.WorkTimeMap.Models.other.Day;
 import com.kovtun.WorkTimeMap.Models.other.Month;
 import com.kovtun.WorkTimeMap.Models.other.MyTreeModel;
 import com.kovtun.WorkTimeMap.Models.other.UserT;
+import com.kovtun.WorkTimeMap.Values;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -68,11 +69,15 @@ public class HeaderForm extends javax.swing.JFrame{
      * Creates new form HeaderForm
      */
     public HeaderForm(JFrame frameLog) {
-        emf=Persistence.createEntityManagerFactory("Work_Time_MapPU");
-        em=emf.createEntityManager();
         logFrame=frameLog;
         initComponents();
-        tree1.setModel(initTreeModel(null));
+        if(Values.user.getRights()!=1){
+            tree1.setModel(initTreeModel(null));
+            emf=Persistence.createEntityManagerFactory("Work_Time_MapPU");
+            em=emf.createEntityManager();
+        }else{
+            
+        }
         createMap();
         ((JPanel)userForm1.getComponents()[2]).remove(((JPanel)userForm1.getComponents()[2]).getComponents()[2]);
     }
@@ -213,6 +218,10 @@ public class HeaderForm extends javax.swing.JFrame{
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -298,6 +307,19 @@ public class HeaderForm extends javax.swing.JFrame{
         jMenu2.add(jMenuItem5);
 
         jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Админ");
+
+        jMenuItem9.setText("Проверить соеденение с базой данных");
+        jMenu3.add(jMenuItem9);
+
+        jMenuItem8.setText("Создать базу данных");
+        jMenu3.add(jMenuItem8);
+
+        jMenuItem10.setText("Менеджер пользователей");
+        jMenu3.add(jMenuItem10);
+
+        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
@@ -438,14 +460,18 @@ public class HeaderForm extends javax.swing.JFrame{
     private javax.swing.JList<String> jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTree tree1;

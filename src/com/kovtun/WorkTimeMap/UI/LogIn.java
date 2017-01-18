@@ -75,29 +75,29 @@ public class LogIn extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
 
-        jLabel1.setText("Логин:");
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel1.setText("Логин:");
 
         textField1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
 
-        jLabel2.setText("Пароль:");
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel2.setText("Пароль:");
 
         passwordField1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
 
-        rememberCheckBox.setText("Запомнить");
         rememberCheckBox.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        rememberCheckBox.setText("Запомнить");
 
-        cancelButton.setText("Отмана");
         cancelButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        cancelButton.setText("Отмана");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelButtonActionPerformed(evt);
             }
         });
 
-        singInButton.setText("ОК");
         singInButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        singInButton.setText("ОК");
         singInButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 singInButtonActionPerformed(evt);
