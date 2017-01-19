@@ -95,13 +95,16 @@ public class ProjectManagerDialog extends javax.swing.JDialog implements UserLis
         });
         nameTextField.getDocument().addDocumentListener(new DocumentListener() {
             public void changedUpdate(DocumentEvent e) {
-              checkSaveAndCancelBuuton();
+                project.setName(nameTextField.getText());
+                checkSaveAndCancelBuuton();
             }
             public void removeUpdate(DocumentEvent e) {
-              checkSaveAndCancelBuuton();
+                project.setName(nameTextField.getText());
+                checkSaveAndCancelBuuton();
             }
             public void insertUpdate(DocumentEvent e) {
-              checkSaveAndCancelBuuton();
+                project.setName(nameTextField.getText());
+                checkSaveAndCancelBuuton();
             }
         });
     }
