@@ -25,6 +25,8 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import com.kovtun.WorkTimeMap.CallBacks.AddNewProjectCallBack;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 /**
  *
  * @author kovtun
@@ -89,6 +91,17 @@ public class ProjectManagerDialog extends javax.swing.JDialog implements UserLis
                     }else
                         selectProject();
                 }
+            }
+        });
+        nameTextField.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+              checkSaveAndCancelBuuton();
+            }
+            public void removeUpdate(DocumentEvent e) {
+              checkSaveAndCancelBuuton();
+            }
+            public void insertUpdate(DocumentEvent e) {
+              checkSaveAndCancelBuuton();
             }
         });
     }
@@ -214,7 +227,7 @@ public class ProjectManagerDialog extends javax.swing.JDialog implements UserLis
         jLabel1.setText("Название: ");
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel5.setText("Учасники:");
+        jLabel5.setText("Участники:");
 
         jLabel6.setText("Действия:");
 
