@@ -7,10 +7,10 @@
     <class>com.kovtun.WorkTimeMap.Models.db.Log</class>
     <class>com.kovtun.WorkTimeMap.Models.db.Project</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/wtm?useUnicode=yes&amp;characterEncoding=UTF-8"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://192.168.0.150:3306/wtm?useUnicode=yes&amp;characterEncoding=UTF-8"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="root"/>
+      <property name="javax.persistence.jdbc.password" value="As091991"/>
     </properties>
   </persistence-unit>
 </persistence>

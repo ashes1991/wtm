@@ -311,8 +311,7 @@ private void SingIn(){
      * @NamedQuery(name = "Project.findByUserId", query = "SELECT p FROM Project p WHERE p.creatorId.id=:id")})
     //SELECT p FROM Project p JOIN p.creatorId u JOIN p.userList u1 WHERE u.id= :id AND u1.id=:id1
      */
-    emf=Persistence.createEntityManagerFactory("Work_Time_MapPU");
-    EntityManager em=emf.createEntityManager();
+    
         if (!textField1.getText().isEmpty()){
             if(textField1.getText().equals(ADMIN_LOGIN)){
                 if (!String.copyValueOf(passwordField1.getPassword()).isEmpty()){
@@ -328,6 +327,8 @@ private void SingIn(){
                 }else JOptionPane.showMessageDialog(this, "Введите пароль","Ошибка", JOptionPane.ERROR_MESSAGE);
             }else{
                 if(CheckString(textField1.getText(),Constants.USER_LOGIN)){
+                    emf=Persistence.createEntityManagerFactory("Work_Time_MapPU");
+                    EntityManager em=emf.createEntityManager();
                     List<User> userList=em.createNamedQuery("User.findByLogin", User.class).setParameter("login", textField1.getText()).getResultList();
                     if(userList.size()>0){
                         if (CheckString(passwordField1.getText(),Constants.USER_PASSWORD)){

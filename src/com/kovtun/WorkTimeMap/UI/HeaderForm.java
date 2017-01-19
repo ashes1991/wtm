@@ -13,7 +13,10 @@ import com.kovtun.WorkTimeMap.Models.other.Day;
 import com.kovtun.WorkTimeMap.Models.other.Month;
 import com.kovtun.WorkTimeMap.Models.other.MyTreeModel;
 import com.kovtun.WorkTimeMap.Models.other.UserT;
+import com.kovtun.WorkTimeMap.SQLConnector;
 import com.kovtun.WorkTimeMap.Values;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -72,16 +75,13 @@ public class HeaderForm extends javax.swing.JFrame{
         logFrame=frameLog;
         initComponents();
         if(Values.user.getRights()!=1){
-            tree1.setModel(initTreeModel(null));
-            emf=Persistence.createEntityManagerFactory("Work_Time_MapPU");
-            em=emf.createEntityManager();
-        }else{
-            
-        }
+            jMenuItem8ActionPerformed(null);
+            jMenu3.setEnabled(false);
+        }else
+            setMenuEnabled(false);
         createMap();
         ((JPanel)userForm1.getComponents()[2]).remove(((JPanel)userForm1.getComponents()[2]).getComponents()[2]);
     }
-    
     
     private MyTreeModel initTreeModel(Project project){
         userList=new ArrayList<UserT>();
@@ -220,8 +220,8 @@ public class HeaderForm extends javax.swing.JFrame{
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -310,14 +310,30 @@ public class HeaderForm extends javax.swing.JFrame{
 
         jMenu3.setText("Админ");
 
-        jMenuItem9.setText("Проверить соеденение с базой данных");
+        jMenuItem9.setText("Работа с базой данных");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem9);
 
-        jMenuItem8.setText("Создать базу данных");
-        jMenu3.add(jMenuItem8);
-
         jMenuItem10.setText("Менеджер пользователей");
+        jMenuItem10.setEnabled(false);
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem10);
+
+        jMenuItem8.setText("Подключится");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem8);
 
         jMenuBar1.add(jMenu3);
 
@@ -433,6 +449,30 @@ public class HeaderForm extends javax.swing.JFrame{
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        WorkWithDBDialog dialog=new WorkWithDBDialog(this,true);
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        emf=Persistence.createEntityManagerFactory("Work_Time_MapPU");
+        try{
+            em=emf.createEntityManager();
+            tree1.setModel(initTreeModel(null));
+            setMenuEnabled(true);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Ошибка подключения к базе данных","Ошибка", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        UserManagerDialog dialog = new UserManagerDialog(new javax.swing.JFrame(), true,em);
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+        tree1.setModel(initTreeModel(null));
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
     
     private void setList(List<Action> list){
         actionList=list;
@@ -453,7 +493,11 @@ public class HeaderForm extends javax.swing.JFrame{
         userForm1.projectLabel.setText(action==null?"":action.getProjectId().getName());
     }
     
-
+    private void setMenuEnabled(boolean enabled){
+        jMenuItem10.setEnabled(enabled);
+        jMenu1.setEnabled(enabled);
+        jMenu2.setEnabled(enabled);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
